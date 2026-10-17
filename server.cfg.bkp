@@ -1,0 +1,50 @@
+# WANRING!!! To keep things organized you can start resources in resources.cfg instead of here!!
+
+endpoint_add_tcp "0.0.0.0:30120"
+endpoint_add_udp "0.0.0.0:30120"
+
+sv_maxclients 48
+sv_licenseKey "cfxk_Z8RKyNQiXpUsOxW2rnjD_2P5aLK"
+set steam_webApiKey "none"
+
+set mysql_connection_string "mysql://root@localhost/SGFramework_D3AE1E?charset=utf8mb4" # https://overextended.dev/oxmysql
+set sv_filterRequestControl 2 # https://docs.fivem.net/docs/server-manual/server-commands/#sv_filterrequestcontrol-mode
+sv_enforceGameBuild 3095 # https://docs.fivem.net/docs/server-manual/server-commands/#sv_enforcegamebuild-build
+sv_pureLevel 1 # https://docs.fivem.net/docs/server-manual/server-commands/#sv_purelevel-level
+sv_scriptHookAllowed 0
+
+sv_hostname "SG Framework built with ND_Core Main by Andyyy!"
+sets sv_projectName "[ND_Core Main] SG Framework"
+sets sv_projectDesc "The official recipe for ND_Core."
+sets tags "nd_core"
+sets locale "en_US"
+load_server_icon logo.png
+
+add_ace resource.ox_lib command.add_ace allow
+add_ace resource.ox_lib command.remove_ace allow
+add_ace resource.ox_lib command.add_principal allow
+add_ace resource.ox_lib command.remove_principal allow
+
+## Add system admins
+add_ace group.admin command allow # allow all commands
+add_principal identifier.fivem:1454897 group.admin #TommyGunn
+
+## These resources will start by default.
+ensure mapmanager
+ensure chat
+ensure spawnmanager
+ensure sessionmanager
+ensure basic-gamemode
+ensure hardcap
+
+## Add system admins
+add_ace group.admin command allow # allow all commands
+add_principal identifier.fivem:1454897 group.admin #TommyGunn
+
+# Set npwd framework.
+set npwd:framework ndcore
+
+# execute other cfg.
+exec ndcore.cfg
+exec inventory.cfg
+exec resources.cfg
