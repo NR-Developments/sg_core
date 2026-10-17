@@ -12,7 +12,7 @@ The supplied config targets GTA game build **3570**, per the server owner. `sv_s
 
 3. Set the license key and database connection in `server.cfg`. Review admin ACE entries and `sg_core.cfg` settings.
 4. Start using `server.cfg`, which loads `sg_core.cfg`, `inventory.cfg`, then `resources.cfg`. Do not additionally ensure the whole `[scripts]` folder or run another core.
-5. Core tables are created on first run; banking and MDT retain their own schema initialization. See [integration status](docs/INTEGRATION.md) before enabling optional add-ons.
+5. For a manual full schema import, use [database/SG_Framework.sql](database/SG_Framework.sql) in the database selected by `mysql_connection_string`; see [database instructions](database/README.md). Core tables are also created on first run; banking and MDT retain their own schema initialization. See [integration status](docs/INTEGRATION.md) before enabling optional add-ons.
 
 The default set includes character selection, appearance shops, inventory/target/doors, status, banking, dealership, fuel, casino/blackjack, nitro, MDT, police and ambulance. These still require live gameplay validation. Competing shops, dealerships, and job/mechanic systems are not automatically started together.
 

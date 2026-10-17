@@ -6,4 +6,4 @@ CREATE TABLE IF NOT EXISTS `nd_mdt_weapons` (
 	`stolen` INT(1) DEFAULT '0',
 	INDEX `FK_nd_mdt_weapons_characters` (`character`) USING BTREE,
 	CONSTRAINT `FK_nd_mdt_weapons_characters` FOREIGN KEY (`character`) REFERENCES `nd_characters` (`charid`) ON UPDATE CASCADE ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

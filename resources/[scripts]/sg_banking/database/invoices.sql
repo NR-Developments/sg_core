@@ -9,4 +9,4 @@ CREATE TABLE IF NOT EXISTS `nd_banking_invoices` (
     `due_in` VARCHAR(50) DEFAULT NULL,
     `status` VARCHAR(50) DEFAULT NULL,
     PRIMARY KEY (`invoice_id`) USING BTREE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

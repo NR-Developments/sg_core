@@ -12,4 +12,4 @@ CREATE TABLE IF NOT EXISTS `nd_vehicles` (
     PRIMARY KEY (`id`) USING BTREE,
     INDEX `owner` (`owner`) USING BTREE,
     CONSTRAINT `vehowner` FOREIGN KEY (`owner`) REFERENCES `nd_characters` (`charid`) ON UPDATE CASCADE ON DELETE CASCADE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -13,4 +13,4 @@ CREATE TABLE IF NOT EXISTS `nd_characters` (
     `metadata` LONGTEXT DEFAULT ('[]'),
     `inventory` LONGTEXT DEFAULT ('[]'),
     PRIMARY KEY (`charid`) USING BTREE
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
