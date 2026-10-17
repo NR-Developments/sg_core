@@ -25,11 +25,10 @@
       <form id="registerf">
           <input type="text" placeholder="First name" name="firstname" id="firstname"  required>
           <input type="text" placeholder="Last name" name="lastname" id="lastname" required>
-          <input type="text" placeholder="Gender" name="sex" hidden>
           <div class="form-item" id="sex">
             <div class="form-gender">
                     <label class="gender" onclick="sex('m')">
-                      <input type="radio" name="sex" value = 'm'>
+                      <input type="radio" name="sex" value = 'm' checked>
                       <span class="male">Male</span>
                     </label>
                     <label class="gender" onclick="sex('f')">
@@ -50,8 +49,8 @@
           <br>
           <textarea id="freeform" name="freeform" rows="4" cols="50" placeholder="Background story:" style="height:50px;background-color:#252a34; border-radius: 9px; text-align: center;padding-top:10px;color:fefefe;"></textarea>
           <input type="submit" value="enter" onclick="event.preventDefault(); register()" />
+      </form>
   </div>
-</form>
 </section>
 
   <div class="char" id="multi" style="display:none;">

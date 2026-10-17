@@ -110,7 +110,7 @@ $(document).on('click', '.house-adress-location', function(e){
     var ClickedHouse = $(this).attr('id');
     var ClickedHouseData = $("#"+ClickedHouse).data('HouseData');
 
-    $.post('https://ef-phone/SetGPSLocation', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/SetGPSLocation`, JSON.stringify({
         coords: ClickedHouseData.coords
     }))
 });
@@ -121,7 +121,7 @@ $(document).on('click', '.appartment-adress-location', function(e){
     var ClickedPerson = $(this).attr('id');
     var ClickedPersonData = $("#"+ClickedPerson).data('PersonData');
 
-    $.post('https://ef-phone/SetApartmentLocation', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/SetApartmentLocation`, JSON.stringify({
         data: ClickedPersonData
     }));
 });
@@ -142,7 +142,7 @@ $(document).on('click', '.person-search-result-apartment > span', function(e){
 
     QB.Phone.Notifications.Add("fas fa-university", "MDT", "House number copied!", "#badc58", 1750);
 
-    $.post('https://ef-phone/SetApartmentLocation', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/SetApartmentLocation`, JSON.stringify({
         data: ClickedPersonData
     }));
     $("#testerino").css("display", "none")
@@ -186,7 +186,7 @@ $(document).on('click', '.confirm-search-person-test', function(e){
     var SearchName = $(".person-search-input").val();
 
     if (SearchName !== "") {
-        $.post('https://ef-phone/FetchSearchResults', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/FetchSearchResults`, JSON.stringify({
             input: SearchName,
         }), function(result){
             if (result != null) {
@@ -212,7 +212,7 @@ $(document).on('click', '.confirm-search-person-house', function(e){
     var SearchName = $(".person-search-input-house").val();
 
     if (SearchName !== "") {
-        $.post('https://ef-phone/FetchPlayerHouses', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/FetchPlayerHouses`, JSON.stringify({
             input: SearchName,
         }), function(result){
             if (result != null) {
@@ -238,7 +238,7 @@ $(document).on('click', '.confirm-search-vehicle', function(e){
     var SearchName = $(".vehicle-search-input").val();
     
     if (SearchName !== "") {
-        $.post('https://ef-phone/FetchVehicleResults', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/FetchVehicleResults`, JSON.stringify({
             input: SearchName,
         }), function(result){
             if (result != null) {
@@ -266,7 +266,7 @@ $(document).on('click', '.confirm-search-vehicle', function(e){
 
 $(document).on('click', '.scan-search-vehicle', function(e){
     e.preventDefault();
-    $.post('https://ef-phone/FetchVehicleScan', JSON.stringify({}), function(vehicle){
+    $.post(`https://${GetParentResourceName()}/FetchVehicleScan`, JSON.stringify({}), function(vehicle){
         if (vehicle != null) {
             $(".vehicle-search-results").html("");
             var APK = "Yes";
@@ -311,7 +311,7 @@ $(document).on('click', '.meos-recent-alert', function(e){
 
     if (alertData != undefined){
         if (alertData.coords != undefined && alertData.coords != null) {
-            $.post('https://ef-phone/SetAlertWaypoint', JSON.stringify({
+            $.post(`https://${GetParentResourceName()}/SetAlertWaypoint`, JSON.stringify({
                 alert: alertData,
             }));
         } else {
@@ -325,7 +325,7 @@ $(document).on('click', '.meos-recent-alert', function(e){
 $(document).on('click', '.meos-location-button', function(e){
     e.preventDefault();
     var alertData = $(this).parent().data("alertData");
-    $.post('https://ef-phone/SetAlertWaypoint', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/SetAlertWaypoint`, JSON.stringify({
         alert: alertData,
     }));
 });

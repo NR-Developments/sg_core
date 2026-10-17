@@ -12,5 +12,9 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y liblua5.4-0
       - name: Test canonical core and adapters
         run: python3 tools/test_core.py
+      - name: Test startup imports and character UI
+        run: |
+          python3 tools/test_startup.py
+          node tools/test_character_ui.js
       - name: Audit declared runtime scripts and default startup
         run: python3 tools/audit_resources.py

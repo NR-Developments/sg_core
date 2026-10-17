@@ -57,7 +57,7 @@ Login=function(src,slot,info)
             if #first<1 or #first>40 or #last<1 or #last>40 then return false end
             p=Core:newCharacter(src,{firstname=first,lastname=last,dob=tostring(info.dateofbirth or info.birthdate or ''):sub(1,20),
                 gender=info.sex=='f' and 'f' or 'm',cash=GetConvarInt('sg:startingCash',500),bank=GetConvarInt('sg:startingBank',5000),
-                metadata={sgSlot=slot,sgNew=true,location={x=Config.Spawn.x,y=Config.Spawn.y,z=Config.Spawn.z,w=0}}})
+                metadata={sgSlot=slot,sgNew=true,nationality=tostring(info.nationality or ''):sub(1,80),background=tostring(info.freeform or ''):sub(1,2000),location={x=Config.Spawn.x,y=Config.Spawn.y,z=Config.Spawn.z,w=0}}})
             if not p then return false end
             p.setJob('unemployed',1);p.save()
         elseif not p then return false end

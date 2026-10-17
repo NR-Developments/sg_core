@@ -28,7 +28,7 @@
 					  stopped = true;
 					  console.log("DONE")
 						var xhr = new XMLHttpRequest();
-						xhr.open("POST", 'https://renzu_progressbar/close', true);
+						xhr.open("POST", `https://${GetParentResourceName()}/close`, true);
 						xhr.setRequestHeader('Content-Type', 'application/json');
 						xhr.send(JSON.stringify({}));
 				  }

@@ -60,7 +60,7 @@ function removebill(name,totalcost,index) {
 
 function ShowSubmenu(data) {
     backdata2 = data
-    $.post("https://renzu_customs/Reset", JSON.stringify({}));
+    $.post(`https://${GetParentResourceName()}/Reset`, JSON.stringify({}));
     document.getElementById("custom").innerHTML = '';
     setTimeout(function(){
         var color = false
@@ -90,7 +90,7 @@ function ShowSubmenu(data) {
                     var index = i
                     $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/18.svg"><div class="mod_title"><span>`+data[i].label+`</span></div></button>`)
                     $("#"+i+"").click(function() {
-                        //$.post("https://renzu_customs/ToggleTurbo", JSON.stringify({ index: data[index].list[ind]}));
+                        //$.post(`https://${GetParentResourceName()}/ToggleTurbo`, JSON.stringify({ index: data[index].list[ind]}));
                         ShowTurboMenu(data[i])
                     });
                 } else if (i == 105) {
@@ -111,7 +111,7 @@ function ShowSubmenu(data) {
                                 document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                                 upgraded[index] = ind
                             }
-                            $.post("https://renzu_customs/SetExtra", JSON.stringify({ index: data[index].list[ind]}));
+                            $.post(`https://${GetParentResourceName()}/SetExtra`, JSON.stringify({ index: data[index].list[ind]}));
                             //ShowTurboMenu(data[i])
                         });
                     }
@@ -134,7 +134,7 @@ function ShowSubmenu(data) {
                                 upgraded[index] = ind
                                 lastcost = data[index].list[ind].value
                             }
-                            $.post("https://renzu_customs/SetCustomEngine", JSON.stringify({ engine: data[index].list[ind].model}));
+                            $.post(`https://${GetParentResourceName()}/SetCustomEngine`, JSON.stringify({ engine: data[index].list[ind].model}));
                             //ShowTurboMenu(data[i])
                         });
                     }
@@ -157,7 +157,7 @@ function ShowSubmenu(data) {
                                 upgraded[index] = ind
                                 lastcost = data[index].list[ind].value
                             }
-                            $.post("https://renzu_customs/SetCustomTurbo", JSON.stringify({ turbo: ind}));
+                            $.post(`https://${GetParentResourceName()}/SetCustomTurbo`, JSON.stringify({ turbo: ind}));
                             //ShowTurboMenu(data[i])
                         });
                     }
@@ -180,7 +180,7 @@ function ShowSubmenu(data) {
                                 upgraded[index] = ind
                                 lastcost = data[index].list[ind].value
                             }
-                            $.post("https://renzu_customs/SetCustomTireType", JSON.stringify({ tire: ind}));
+                            $.post(`https://${GetParentResourceName()}/SetCustomTireType`, JSON.stringify({ tire: ind}));
                             //ShowTurboMenu(data[i])
                         });
                     }
@@ -196,7 +196,7 @@ function ShowSubmenu(data) {
                     colortype = data[i].type
                 } else if (i == 101) {
                     var index = i
-                    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: 'headlight'}));
+                    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: 'headlight'}));
                     for (const ind in data[index].list) {
                         if(ind == 'XenonLights') {
                             $('#custom').append(`<button id="`+ind+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/22.svg"><div class="mod_title"><span>`+ind+`</span></div></button>`)
@@ -207,7 +207,7 @@ function ShowSubmenu(data) {
                                     document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                                     upgraded[index] = 1
                                 }
-                                $.post("https://renzu_customs/XenonMod", JSON.stringify({ index: data[index].list[ind]}));
+                                $.post(`https://${GetParentResourceName()}/XenonMod`, JSON.stringify({ index: data[index].list[ind]}));
                             });
                         } else if(ind == 'Default') {
                             $('#custom').append(`<button id="`+ind+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/22.svg"><div class="mod_title"><span>`+ind+`</span></div></button>`)
@@ -218,7 +218,7 @@ function ShowSubmenu(data) {
                                     removebill('XenonLights',totalcost,'XenonLights')
                                 }
                                 document.getElementById("cost").innerHTML = totalcost.toFixed(1);
-                                $.post("https://renzu_customs/XenonMod", JSON.stringify({ index: data[index].list[ind]}));
+                                $.post(`https://${GetParentResourceName()}/XenonMod`, JSON.stringify({ index: data[index].list[ind]}));
                             });
                         } else if(ind == 'XenonColor') {
                             $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/28.svg"><div class="mod_title"><span>`+data[i].label+`</span></div></button>`)
@@ -229,7 +229,7 @@ function ShowSubmenu(data) {
                     }
                 } else if (i == 102) {
                     var index = i
-                    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: 4}));
+                    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: 4}));
                     for (const ind in data[index].list) {
                         $('#custom').append(`<button id="`+ind+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/26.svg"><div class="mod_title"><span>#`+ind+`</span></div></button>`)
                         $("#"+ind+"").click(function() {
@@ -248,14 +248,14 @@ function ShowSubmenu(data) {
                             }
                             lvladd = lvl
                             document.getElementById("cost").innerHTML = totalcost.toFixed(1);
-                            $.post("https://renzu_customs/ChangePlate", JSON.stringify({ index: data[index].list[ind]}));
+                            $.post(`https://${GetParentResourceName()}/ChangePlate`, JSON.stringify({ index: data[index].list[ind]}));
                         });
                     }
                 } else if (i == 103) {
                     var index = i
-                    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: 'neon'}));
+                    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: 'neon'}));
                     var haveneon = false;
-                    $.post("https://renzu_customs/isNeonLights", JSON.stringify({}), function(data) {
+                    $.post(`https://${GetParentResourceName()}/isNeonLights`, JSON.stringify({}), function(data) {
                         haveneon = data[0]
                     });
                     for (const ind in data[index].list) {
@@ -268,7 +268,7 @@ function ShowSubmenu(data) {
                                     removebill(data[index].name,totalcost,index)
                                     document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                                 }
-                                $.post("https://renzu_customs/SetNeonState", JSON.stringify({ index: false}));
+                                $.post(`https://${GetParentResourceName()}/SetNeonState`, JSON.stringify({ index: false}));
                             });
                         } else if(ind == 'NeonKit') {
                             $('#custom').append(`<button id="`+ind+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/neon.svg"><div class="mod_title"><span>`+ind+`</span></div></button>`)
@@ -279,7 +279,7 @@ function ShowSubmenu(data) {
                                     addbill(data[index].name,data[index].cost,totalcost,index)
                                     document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                                 }
-                                $.post("https://renzu_customs/SetNeonState", JSON.stringify({ index: true}));
+                                $.post(`https://${GetParentResourceName()}/SetNeonState`, JSON.stringify({ index: true}));
                             });
                         } else if(ind == 'NeonColor') {
                             $('#custom').prepend(`<button id="colordiv" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><input type="color" id="neon" value="#ff0000"><div class="mod_title"><span>Neon Color</span></div></button>`)
@@ -290,7 +290,7 @@ function ShowSubmenu(data) {
                     }
                 } else if (i == 104) {
                     var index = i
-                    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: 'window'}));
+                    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: 'window'}));
                     for (const ind in data[index].list) {
                         $('#custom').append(`<button id="`+ind+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/window.svg"><div class="mod_title"><span>`+ind+`</span></div></button>`)
                         $("#"+ind+"").click(function() {
@@ -306,7 +306,7 @@ function ShowSubmenu(data) {
                                 document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                                 upgraded[index] = ind
                             }
-                            $.post("https://renzu_customs/SetWindowTint", JSON.stringify({ index: data[index].list[ind]}));
+                            $.post(`https://${GetParentResourceName()}/SetWindowTint`, JSON.stringify({ index: data[index].list[ind]}));
                         });
                     }
                 } else {
@@ -348,23 +348,23 @@ function SetCustomColor(event) {
     addbill('Custom Paint',totalcost,totalcost,'paint')
     document.getElementById("cost").innerHTML = totalcost.toFixed(1);
     upgraded['paint'] = 'Custom Paint'
-    $.post("https://renzu_customs/SetCustomColor", JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b, type:colortype}));
+    $.post(`https://${GetParentResourceName()}/SetCustomColor`, JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b, type:colortype}));
 }
 
 function SetNeonColor(event) {
-    $.post("https://renzu_customs/SetNeonColor", JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b}));
+    $.post(`https://${GetParentResourceName()}/SetNeonColor`, JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b}));
 }
 
 function ShowXenonMenu(data) {
     //backdata2 = {data,max}
     lvladd = 0
     document.getElementById("custom").innerHTML = '';
-    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: data.index}));
+    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: data.index}));
     setTimeout(function(){
         for (const i in data) {
             $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/28.svg"><div class="mod_title"><span>`+i+`</span></div></button>`)
             $("#"+i+"").click(function() {
-                $.post("https://renzu_customs/SetXenonColor", JSON.stringify({ index: data[i]}));
+                $.post(`https://${GetParentResourceName()}/SetXenonColor`, JSON.stringify({ index: data[i]}));
             });
         }
         $('#custom').prepend(`<button id="close2" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/b.svg"><div class="mod_title"><span>Back</span></div></button>`)
@@ -447,7 +447,7 @@ function ShowWheelAcceOption(data,max,list) {
                         document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                         upgraded['CustomTire'] = 1
                     }
-                    $.post("https://renzu_customs/SetCustomTire", JSON.stringify({ }));
+                    $.post(`https://${GetParentResourceName()}/SetCustomTire`, JSON.stringify({ }));
                 });
             } else if (i == 'SmokeColor') {
                 $('#custom').prepend(`<button id="colordiv" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><input type="color" id="color" value="#ff0000"><div class="mod_title"><span>Smoke Color</span></div></button>`)
@@ -457,7 +457,7 @@ function ShowWheelAcceOption(data,max,list) {
             } else if (i == 'BulletProof') {
                 $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/28.svg"><div class="mod_title"><span>`+i+`</span></div></button>`)
                 $("#"+i+"").click(function() {
-                    $.post("https://renzu_customs/SetBulletProofTires", JSON.stringify({ }));
+                    $.post(`https://${GetParentResourceName()}/SetBulletProofTires`, JSON.stringify({ }));
                 });
             } else if (i == 'DriftTires') {
                 $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/28.svg"><div class="mod_title"><span>`+i+`</span></div></button>`)
@@ -473,7 +473,7 @@ function ShowWheelAcceOption(data,max,list) {
                         document.getElementById("cost").innerHTML = totalcost.toFixed(1);
                         upgraded['DriftTire'] = 1
                     }
-                    $.post("https://renzu_customs/SetDrift", JSON.stringify({ }));
+                    $.post(`https://${GetParentResourceName()}/SetDrift`, JSON.stringify({ }));
                 });
             }
         }
@@ -488,7 +488,7 @@ function ShowWheelAcceOption(data,max,list) {
 }
 
 function SetSmokeColor(event) {
-    $.post("https://renzu_customs/SetSmokeColor", JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b, type:colortype}));
+    $.post(`https://${GetParentResourceName()}/SetSmokeColor`, JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b, type:colortype}));
 }
 
 function ShowPaintOption(data,list,option) {
@@ -516,7 +516,7 @@ function ShowXenonOption(data,list) {
         for (const i in list) {
             $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/22.svg"><div class="mod_title"><span>#`+i+`</span></div></button>`)
             $("#"+i+"").click(function() {
-                $.post("https://renzu_customs/XenonMod", JSON.stringify({ index: list[i]}));
+                $.post(`https://${GetParentResourceName()}/XenonMod`, JSON.stringify({ index: list[i]}));
             });
         }
         $('#custom').prepend(`<button id="close2" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/b.svg"><div class="mod_title"><span>Back</span></div></button>`)
@@ -532,7 +532,7 @@ function ShowXenonOption(data,list) {
 function ShowTurboMenu(data) {
     lvladd = 0
     document.getElementById("custom").innerHTML = '';
-    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: data.index}));
+    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: data.index}));
     setTimeout(function(){
         for (const i in data.list) {
             $('#custom').append(`<button id="`+i+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/18.svg"><div class="mod_title"><span>`+i+`</span></div></button>`)
@@ -554,7 +554,7 @@ function ShowTurboMenu(data) {
             }
             lvladd = lvl
             document.getElementById("cost").innerHTML = totalcost.toFixed(1);
-                $.post("https://renzu_customs/ToggleTurbo", JSON.stringify({ index: data.list[i]}));
+                $.post(`https://${GetParentResourceName()}/ToggleTurbo`, JSON.stringify({ index: data.list[i]}));
                 //SetMod(data.index,i,data.cost,wheeltype)
             });
         }
@@ -578,11 +578,11 @@ function ShowIndexMenu(data,max,wheeltype) {
     document.getElementById("custom").innerHTML = '';
     var oldinstalled = -1
     var max = max
-    $.post("https://renzu_customs/SelectModIndex", JSON.stringify({ index: data.index}), function(ind,m) {
+    $.post(`https://${GetParentResourceName()}/SelectModIndex`, JSON.stringify({ index: data.index}), function(ind,m) {
         setTimeout(function(){
             const mods = function() {
                 var installed = ind + 1
-                $.post("https://renzu_customs/GetModData", JSON.stringify({ index: data.index,wheeltype:wheeltype}), function(d) {
+                $.post(`https://${GetParentResourceName()}/GetModData`, JSON.stringify({ index: data.index,wheeltype:wheeltype}), function(d) {
                     for (let i = 0; i < d.max; i++) {
                         var label = d.mod[i]
                         if (label == '' || label == 'NULL') { label = i+' Lvl' }
@@ -613,7 +613,7 @@ function ShowIndexMenu(data,max,wheeltype) {
                 document.getElementById("custom").innerHTML = '';
                 setTimeout(function(){
                     ShowSubmenu(backdata2)
-                    $.post("https://renzu_customs/closedoor", JSON.stringify({ }), function(d) {})
+                    $.post(`https://${GetParentResourceName()}/closedoor`, JSON.stringify({ }), function(d) {})
                 }, 100);
             });
         }, 100);
@@ -621,14 +621,14 @@ function ShowIndexMenu(data,max,wheeltype) {
 }
 
 function GetMod(index) {
-    $.post("https://renzu_customs/GetMod", JSON.stringify({ index: index}), function(data) {
+    $.post(`https://${GetParentResourceName()}/GetMod`, JSON.stringify({ index: index}), function(data) {
         return data 
     });
 }
 
 function SetWheelColor(index) {
     //document.getElementById("cost").innerHTML = totalcost;
-    $.post("https://renzu_customs/SetWheelColor", JSON.stringify({ index: index}));
+    $.post(`https://${GetParentResourceName()}/SetWheelColor`, JSON.stringify({ index: index}));
 }
 
 var lastcost = {}
@@ -669,7 +669,7 @@ function SetMod(index,lvl,cost,wheeltype,label,multi) {
     }
     lvladd = lvl
     document.getElementById("cost").innerHTML = totalcost.toFixed(1);
-    $.post("https://renzu_customs/SetMod", JSON.stringify({ index: index, lvl: lvl, wheeltype: wheeltype}));
+    $.post(`https://${GetParentResourceName()}/SetMod`, JSON.stringify({ index: index, lvl: lvl, wheeltype: wheeltype}));
 }
 
 var oldpaint = undefined
@@ -678,7 +678,7 @@ function SetPaint(type,i,cost,option) {
         totalcost = totalcost + cost
         upgraded[type] = i
         addbill('Paint',cost,totalcost,1,'Paint')
-        $.post("https://renzu_customs/GetPaint", JSON.stringify({option:option}), function(data) {
+        $.post(`https://${GetParentResourceName()}/GetPaint`, JSON.stringify({option:option}), function(data) {
             if (type == 'Primary Color') {
                 oldpaint = data[0]
             } else {
@@ -692,7 +692,7 @@ function SetPaint(type,i,cost,option) {
         removebill('Paint',totalcost,'Paint')
     }
     document.getElementById("cost").innerHTML = totalcost.toFixed(1);
-    $.post("https://renzu_customs/SetPaint", JSON.stringify({ index: i, type: type, option:option}));
+    $.post(`https://${GetParentResourceName()}/SetPaint`, JSON.stringify({ index: i, type: type, option:option}));
 }
 
 function close() {
@@ -706,7 +706,7 @@ function close2() {
 function ShowMod(data) {
     backdata = data
     var datas = []
-    $.post("https://renzu_customs/Reset", JSON.stringify({}));
+    $.post(`https://${GetParentResourceName()}/Reset`, JSON.stringify({}));
     for(const [k,v] of Object.entries(data)) {
         datas[k] = v
         $('#custom').append(`<button id="`+k.replace(/[^a-z0-9]/gi,'')+`" class="modclass" onmouseover="menusound('menu')" onclick="menusound('click')"><img src="img/`+v.index+`.svg"><div class="mod_title"><span>`+k+`</span></div></button>`)
@@ -724,7 +724,7 @@ function pay() {
     document.getElementById("invoicelist").innerHTML = '';
     document.getElementById("cost").innerHTML = '';
     document.getElementById("totalcost2").innerHTML = '';
-    $.post('https://renzu_customs/pay', JSON.stringify({cost:totalcost}), function(data) {
+    $.post(`https://${GetParentResourceName()}/pay`, JSON.stringify({cost:totalcost}), function(data) {
         window.location.reload(false)
     }) 
 }
@@ -789,7 +789,7 @@ window.addEventListener('message', function(event) {
 });
 
 function Repair() {
-    $.post('https://renzu_customs/repair', JSON.stringify({}), function(bool) {
+    $.post(`https://${GetParentResourceName()}/repair`, JSON.stringify({}), function(bool) {
         if (bool) {
             document.getElementById("repair").style.display = 'none';
             document.getElementById("perf").style.display = 'block';
@@ -804,11 +804,11 @@ function Repair() {
 
 function custompaintdone() {
     document.getElementById("custompaint").style.display = 'none';
-    $.post("https://renzu_customs/CustomPaintDone", JSON.stringify({ }));
+    $.post(`https://${GetParentResourceName()}/CustomPaintDone`, JSON.stringify({ }));
 }
 
 function SetCustomPaint(event) {
-    $.post("https://renzu_customs/CustomPaint", JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b}));
+    $.post(`https://${GetParentResourceName()}/CustomPaint`, JSON.stringify({ r: hexToRgb(event.target.value).r, g:hexToRgb(event.target.value).g, b:hexToRgb(event.target.value).b}));
 }
 
 var scrollAmount = 0
@@ -817,10 +817,10 @@ $(document).on('keydown', function(event) {
     switch(event.keyCode) {
         case 27: // ESC
             document.getElementById("custom").innerHTML = '';
-            $.post('https://renzu_customs/Close');
+            $.post(`https://${GetParentResourceName()}/Close`);
             break;
         case 69: // TAB
-            $.post('https://renzu_customs/ToggleCamera');
+            $.post(`https://${GetParentResourceName()}/ToggleCamera`);
             break;
         case 17: // TAB
             break;

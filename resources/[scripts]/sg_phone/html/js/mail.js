@@ -31,7 +31,7 @@ $(document).on('click', '.mail-back', function(e){
 $(document).on('click', '#accept-mail', function(e){
     e.preventDefault();
     var MailData = $("#"+OpenedMail).data('MailData');
-    $.post('https://ef-phone/AcceptMailButton', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/AcceptMailButton`, JSON.stringify({
         buttonEvent: MailData.button.buttonEvent,
         buttonData: MailData.button.buttonData,
         mailId: MailData.mailid,
@@ -47,7 +47,7 @@ $(document).on('click', '#accept-mail', function(e){
 $(document).on('click', '#remove-mail', function(e){
     e.preventDefault();
     var MailData = $("#"+OpenedMail).data('MailData');
-    $.post('https://ef-phone/RemoveMail', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/RemoveMail`, JSON.stringify({
         mailId: MailData.mailid
     }));
     $(".mail-home").animate({
@@ -135,7 +135,7 @@ $(document).on('click','.advimage', function (){
 
 $(document).on('click','#new-advert-photo',function(e){
     e.preventDefault();
-    $.post('https://ef-phone/TakePhoto',function(url){
+    $.post(`https://${GetParentResourceName()}/TakePhoto`,function(url){
         if(url){
             $('#advert-new-url').val(url)
         }
@@ -167,12 +167,12 @@ $(document).on('click', '#new-advert-submit', function(e){
             left: -30+"vh"
         });
         if (!picture){
-            $.post('https://ef-phone/PostAdvert', JSON.stringify({
+            $.post(`https://${GetParentResourceName()}/PostAdvert`, JSON.stringify({
                 message: Advert,
                 url: null
             }));
         }else {
-            $.post('https://ef-phone/PostAdvert', JSON.stringify({
+            $.post(`https://${GetParentResourceName()}/PostAdvert`, JSON.stringify({
                 message: Advert,
                 url: picture
             }));
@@ -217,7 +217,7 @@ QB.Phone.Functions.RefreshAdverts = function(Adverts) {
 
 $(document).on('click','#adv-delete',function(e){
     e.preventDefault();
-    $.post('https://ef-phone/DeleteAdvert', function(){
+    $.post(`https://${GetParentResourceName()}/DeleteAdvert`, function(){
         setTimeout(function(){
             QB.Phone.Notifications.Add("fas fa-ad", "Advertisement", "The ad was deleted", "#ff8f1a", 2000);
         },400)

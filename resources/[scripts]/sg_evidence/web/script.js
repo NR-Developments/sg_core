@@ -36,7 +36,7 @@ document.addEventListener("keydown", (event) => {
     if (event.keyCode == 27 || event.keyCode === 36 || event.keyCode === 8) {
         getEl('evidence').style.opacity = '0.0'
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", 'https://renzu_evidence/close', true)
+        xhr.open("POST", `https://${GetParentResourceName()}/close`, true)
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send()
     }

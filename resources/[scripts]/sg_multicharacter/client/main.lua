@@ -100,7 +100,7 @@ end
 CreatePedHeadShots = function(characters)
 	for i = 1, slots do
 		local chardata = characters[i]
-		local slot = i-1
+		local slot = i
 		if chardata and not pedshots[slot] then
 			local skin = chardata.skin
 			skin.sex = chardata.sex == "m" and 0 or 1
@@ -547,7 +547,7 @@ RegisterNUICallback('nuicb', function(data, reply)
 			end
 		end
 		local login = callback('sg_multicharacter:createcharacter', {info = data.info, slot = data.slot})
-        if not login then lib.notify({description='Character could not be created',type='error'}); return end
+        if not login then SendNUIMessage({registrationError=true}); SetNuiFocus(true,true); lib.notify({description='Character could not be created',type='error'}); return end
         characters[chosenslot] = characters[chosenslot] or {position={x=defaultspawn.x,y=defaultspawn.y+10,z=defaultspawn.z},extras={}}
 		Cleanups()
 		skin = Config.Default[Config.skin][data.info.sex]
@@ -658,19 +658,7 @@ HandleStates = function(name,data,preview)
 	end
 end
 
-function TryOxLib(file)
-    local fcall = function()
-        local name = ('%s.lua'):format(file)
-        local content = LoadResourceFile('ox_lib',name)
-        local f, err = load(content)
-        return f()
-    end
-    _, ret = pcall(fcall,false)
-    return ret
-end
-
--- sample register states
-TryOxLib('init')
+-- ox_lib is imported by the manifest; reloading it anonymously loses its resource name.
 exports.sg_multicharacter:RegisterStates('invehicle', function()
 	if not lib then return end -- ox_lib
 	lib.onCache('vehicle', function(value)

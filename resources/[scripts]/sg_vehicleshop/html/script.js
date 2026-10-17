@@ -10,12 +10,12 @@ var payment = 'cash'
 
 function changecategory(c,v) {
     //console.log(c,v)
-    $.post("https://renzu_vehicleshop/choosecategory", JSON.stringify({ id: v, category: c}));
+    $.post(`https://${GetParentResourceName()}/choosecategory`, JSON.stringify({ id: v, category: c}));
 }
 
 function changebrands(c,v) {
     //console.log(c,v)
-    $.post("https://renzu_vehicleshop/choosebrands", JSON.stringify({ id: v, brand: c}));
+    $.post(`https://${GetParentResourceName()}/choosebrands`, JSON.stringify({ id: v, brand: c}));
 }
 
 function icon(c) {
@@ -246,7 +246,7 @@ const colors = Array.from({ length: 255 }, () => {
     resetSelection();
     span.parentNode.classList.toggle('selected');
     //document.body.style.background = color;
-    $.post("https://renzu_vehicleshop/choosecolor", JSON.stringify({ r: getRGB(color).r, g:getRGB(color).g, b:getRGB(color).b }))
+    $.post(`https://${GetParentResourceName()}/choosecolor`, JSON.stringify({ r: getRGB(color).r, g:getRGB(color).g, b:getRGB(color).b }))
   };
   
   div.append(span);
@@ -256,11 +256,11 @@ const colors = Array.from({ length: 255 }, () => {
 });
 
 function choosecolor(type) {
-    $.post("https://renzu_vehicleshop/selectcolortype", JSON.stringify({ type:type }))
+    $.post(`https://${GetParentResourceName()}/selectcolortype`, JSON.stringify({ type:type }))
 }
 
 function livery(next) {
-    $.post("https://renzu_vehicleshop/setlivery", JSON.stringify({ next:next }))
+    $.post(`https://${GetParentResourceName()}/setlivery`, JSON.stringify({ next:next }))
 }
 
 function getRGB(str){
@@ -365,13 +365,13 @@ function ShowVehicle(currentTarget) {
                 margin-left: 10px;"> <div class="w3-grey" style="height:5px;width:`+data.brake.toFixed(1)/2*100+`%"></div> </div>
                 </div>
             `);
-            $.post("https://renzu_vehicleshop/SpawnVehicle", JSON.stringify({ modelcar: data.model2 }));
+            $.post(`https://${GetParentResourceName()}/SpawnVehicle`, JSON.stringify({ modelcar: data.model2 }));
         }
     }
 
 }
 function garage() {
-    $.post("https://renzu_vehicleshop/gotogarage", JSON.stringify({id: garage_id }));
+    $.post(`https://${GetParentResourceName()}/gotogarage`, JSON.stringify({id: garage_id }));
 }
 
 function BuyVehicle(n,c,p) {
@@ -464,7 +464,7 @@ function BuyVehicleCallback(option) {
             case 'cancel':
                 break;
             case 'confirm':
-                $.post('https://renzu_vehicleshop/BuyVehicleCallback', JSON.stringify(CurrentVehicle));
+                $.post(`https://${GetParentResourceName()}/BuyVehicleCallback`, JSON.stringify(CurrentVehicle));
                 CurrentVehicle_ = CurrentVehicle
                 CurrentVehicle = {}
                 break;
@@ -478,7 +478,7 @@ function TestDriveCallback(option) {
             case 'cancel':
                 break;
             case 'confirm':
-                $.post('https://renzu_vehicleshop/TestDriveCallback', JSON.stringify(CurrentVehicle));
+                $.post(`https://${GetParentResourceName()}/TestDriveCallback`, JSON.stringify(CurrentVehicle));
                 CurrentVehicle_ = CurrentVehicle
                 CurrentVehicle = {}
                 break;
@@ -492,7 +492,7 @@ function returnvehicle(option) {
         case 'cancel':
             break;
         case 'confirm':
-            $.post('https://renzu_vehicleshop/ReturnVehicle', JSON.stringify(CurrentVehicle_));
+            $.post(`https://${GetParentResourceName()}/ReturnVehicle`, JSON.stringify(CurrentVehicle_));
             CurrentVehicle_ = {}
             break;
     }
@@ -509,7 +509,7 @@ $(document).on('keydown', function(event) {
         case 27: // ESC
             VehicleArr = []
             CurrentVehicle = {}
-            $.post('https://renzu_vehicleshop/Close');
+            $.post(`https://${GetParentResourceName()}/Close`);
             break;
         case 9: // TAB
             break;

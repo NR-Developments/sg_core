@@ -59,7 +59,7 @@ CreateThread(function()
 end)
 
 AddEventHandler("playerSpawned", function()
-    print("^0ND Framework support discord: ^5https://discord.gg/Z9Mxu72zZ6")
+    print("^0SG Framework initialized.")
     SetCanAttackFriendly(PlayerPedId(), true, false)
     NetworkSetFriendlyFireOption(true)
 end)

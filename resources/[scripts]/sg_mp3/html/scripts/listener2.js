@@ -93,7 +93,7 @@ $( "#hide" ).click(function() {
     $("#footer").css({"top":"-25px"});
     $("#footer").css({"left":"55px"});
     hide = true
-    $.post('https://renzu_mp3/focus', JSON.stringify({}));
+    $.post(`https://${GetParentResourceName()}/focus`, JSON.stringify({}));
   }
 });
 
@@ -104,7 +104,7 @@ $( "#play" ).click(function()
 		updateName(name);
     $("#play").css({"display":"none"});
     $("#pause").css({"display":"block"});
-		$.post('https://renzu_mp3/play', JSON.stringify(
+		$.post(`https://${GetParentResourceName()}/play`, JSON.stringify(
 		{
 			url: name,
 		}));
@@ -114,19 +114,19 @@ $( "#play" ).click(function()
 $( "#pause" ).click(function() {
   $("#play").css({"display":"block"});
   $("#pause").css({"display":"none"});
-	$.post('https://renzu_mp3/pause', JSON.stringify({}));
+	$.post(`https://${GetParentResourceName()}/pause`, JSON.stringify({}));
 });
 
 $( "#stop" ).click(function()
 {
-	$.post('https://renzu_mp3/stop', JSON.stringify({}));
+	$.post(`https://${GetParentResourceName()}/stop`, JSON.stringify({}));
 	$("#playing").text("Playing: nothing....");
 	$("#volume").text("Volume: 50%");
 });
 
 $( "#off" ).click(function()
 {
-	$.post('https://renzu_mp3/exit', JSON.stringify({}));
+	$.post(`https://${GetParentResourceName()}/exit`, JSON.stringify({}));
 });
 
 function display(bool) {
@@ -194,18 +194,18 @@ jQuery.fn.extend({
 	playDefault: function() {
 		var def = $(this).attr('value');
 		updateName($(this).attr('url'));
-		$.post('https://renzu_mp3/play_default', JSON.stringify({
+		$.post(`https://${GetParentResourceName()}/play_default`, JSON.stringify({
 			radioId: def,
 		}));	
 	}
 });
 
 $( "#plus" ).click(function() {
-	$.post('https://renzu_mp3/volumeUp', JSON.stringify({}));
+	$.post(`https://${GetParentResourceName()}/volumeUp`, JSON.stringify({}));
 });
 
 $( "#minus" ).click(function() {	
-	$.post('https://renzu_mp3/volumeDown', JSON.stringify({}));	
+	$.post(`https://${GetParentResourceName()}/volumeDown`, JSON.stringify({}));
 });
 
 function roundNumber(num, scale) {

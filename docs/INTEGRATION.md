@@ -4,6 +4,11 @@ This is a reviewable development migration, not the completed full framework req
 
 ## Implemented
 
+- The core import returns its proxy table for `require("@sg_core.init")`, including ambulance bridges.
+- Character and spawn NUI callback origins use `GetParentResourceName()`; other migrated add-on UIs use the same rule. Character slot IDs are one-based throughout UI actions, including sparse/contiguous serialized character lists.
+- Selector initialization uses the manifest's ox_lib import rather than anonymously reloading it. Registration accepts an optional background story and persists nationality/background in SG metadata; failed registration reopens the form.
+- Server config targets game build 3570 and disables state-bag strict mode to support the bundled client-owned state writes. Police shields work without the optional ND_GunAnims aiming override.
+
 - Gameplay resources use `sg_*`; native core global/import/API is `SGCore` / `@sg_core/init.lua` / `exports.sg_core`.
 - Core, banking, dealerships, MDT, police, ambulance, appearance and status references point to SG resource names and the SG native event namespace.
 - Native SG always takes precedence over ESX/QB compatibility when selecting police/casino/MDT/target/door bridges. This avoids non-deterministic bridge selection when all compatibility entry points are started.

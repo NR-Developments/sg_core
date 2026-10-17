@@ -75,7 +75,7 @@ class SoundPlayer
   
 	create()
 	{
-	    $.post('https://renzu_mp3/events', JSON.stringify(
+	    $.post(`https://${GetParentResourceName()}/events`, JSON.stringify(
 	    {
             type: "onLoading",
             id: this.getName(),

@@ -105,7 +105,7 @@ function post(name,data){
 	var name = name;
 	var data = data;
     var xhr = new XMLHttpRequest()
-    xhr.open("POST", "https://renzu_stancer/"+name, true)
+    xhr.open("POST", `https://${GetParentResourceName()}/`+name, true)
     xhr.setRequestHeader('Content-Type', 'application/json')
     xhr.send(JSON.stringify(data))
 }

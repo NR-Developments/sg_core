@@ -8,6 +8,8 @@ Development integration branch for the resources in this repository. **The compl
 
 1. Use a separate test server and database. This branch retains the existing `nd_characters`, `nd_vehicles`, banking and MDT table names to preserve existing ND data; it does not import ESX `users` or QB `players` data.
 2. Use a current FXServer artifact satisfying the bundled `oxmysql` manifest requirement (server build 12913 or later) and enable OneSync.
+The supplied config targets GTA game build **3570**, per the server owner. `sv_stateBagStrictMode` is disabled because this bundled stack writes client-owned state bags. Apply the updated `server.cfg` settings when updating resources.
+
 3. Set the license key and database connection in `server.cfg`. Review admin ACE entries and `sg_core.cfg` settings.
 4. Start using `server.cfg`, which loads `sg_core.cfg`, `inventory.cfg`, then `resources.cfg`. Do not additionally ensure the whole `[scripts]` folder or run another core.
 5. Core tables are created on first run; banking and MDT retain their own schema initialization. See [integration status](docs/INTEGRATION.md) before enabling optional add-ons.
@@ -20,6 +22,8 @@ Shared upstream libraries keep their established names (`ox_lib`, `oxmysql`, `ox
 
 ```sh
 python tools/test_core.py
+python tools/test_startup.py
+node tools/test_character_ui.js
 python tools/audit_resources.py
 ```
 

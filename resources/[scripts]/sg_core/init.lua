@@ -9,3 +9,6 @@ SGCore = setmetatable({}, {
         return self[index]
     end
 })
+
+-- Support both manifest imports and require("@sg_core.init").
+return SGCore

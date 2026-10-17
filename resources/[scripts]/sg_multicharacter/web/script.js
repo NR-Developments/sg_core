@@ -9,7 +9,7 @@
             }
         }
     }
-    xhr.open("POST", 'https://renzu_multicharacter/nuicb', true)
+    xhr.open("POST", `https://${GetParentResourceName()}/nuicb`, true)
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data))
 }
@@ -30,6 +30,10 @@ const toDataURL = url => fetch(url)
 let pedshots = {}
 window.addEventListener('message', function (table) {
     let event = table.data;
+    if (event.registrationError) {
+        getEl('body').style.display = 'block';
+        getEl('register').style.display = 'flex';
+    }
     if (event.fade) {
         getEl('body').style.display = 'block'
         getEl('logocontainer').style.display = 'none'
@@ -83,16 +87,15 @@ window.addEventListener('message', function (table) {
         getEl('logocontainer').style.top = '35%'
     }
     if (event.data) {
-        let chars = event.data?.characters || {}
-        characters = chars
-        if (event.data.slots === undefined) { event.data.slots = 5 }
-        for (var i = 0; i < event.data.slots; i++) {
-            if (!chars[i]) {
-                chars[i] = {name : 'EMPTY SLOT'}
-            } else if (chars[i] && chars[i].name === undefined) {
-                chars[i] = {name : 'EMPTY SLOT'}
-            }
+        const supplied = event.data.characters || {};
+        const chars = {};
+        const count = Number(event.data.slots) || 1;
+        // Lua encodes contiguous lists as JS arrays, sparse slots as keyed objects.
+        for (let slot = 1; slot <= count; slot++) {
+            chars[slot] = (Array.isArray(supplied) ? supplied[slot - 1] : supplied[slot]) || {name: 'EMPTY SLOT'};
         }
+        characters = chars;
+        getEl('characters').innerHTML = '';
         for (const i in chars) {
             let index = i
             let ui = `<div class="char__card">
@@ -146,7 +149,7 @@ window.addEventListener('message', function (table) {
 
 function ShowInfos() {
     getEl('infos').innerHTML = ''
-    let id = chosenslot-1
+    let id = chosenslot
     let infos = {}
     for (const i in characters[id]) {
         let data = characters[id][i]
@@ -201,7 +204,7 @@ function deletechar() {
 }
 
 function showchar(slot) {
-    slot = +slot + 1
+    slot = Number(slot)
     chosenslot = slot
     myForm.reset()
     return SendData({msg: 'showchar', slot : chosenslot})
@@ -210,16 +213,16 @@ function showchar(slot) {
 function register() {
     let formData = new FormData(myForm);
     let data = Object.fromEntries(formData)
-    let login = true
-    for (const i in data) {
-        if(data[i] === '') {
-            login = false
-            getEl(i).style.borderColor = 'red'
-            getEl(i).style.borderStyle = 'outset'
-            setTimeout(() => {
-                getEl(i).style.borderColor = 'unset'
-                getEl(i).style.borderStyle = 'unset'
-            }, 2000)
+    data.sex = data.sex || 'm';
+    let login = true;
+    for (const field of ['firstname', 'lastname', 'dateofbirth', 'nationality']) {
+        if (!String(data[field] || '').trim()) {
+            login = false;
+            const element = getEl(field === 'nationality' ? 'selectCountry' : field);
+            if (element) {
+                element.style.borderColor = 'red';
+                setTimeout(() => { element.style.borderColor = ''; }, 2000);
+            }
         }
     }
     if (login) {

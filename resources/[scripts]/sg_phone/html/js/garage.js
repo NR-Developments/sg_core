@@ -18,7 +18,7 @@ $(document).on('click', '.garage-vehicle', function(e){
 
 $(document).on('click', '#track-vehicle', function(e){
     e.preventDefault()
-    $.post("https://ef-phone/track-vehicle", JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/track-vehicle`, JSON.stringify({
         veh: veh,
     }));
 });

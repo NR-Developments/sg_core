@@ -21,9 +21,9 @@ $(document).on('click', '.phone-app-footer-button', function(e){
         $(".phone-"+PressedFooterTab).show();
 
         if (PressedFooterTab == "recent") {
-            $.post('https://ef-phone/ClearRecentAlerts');
+            $.post(`https://${GetParentResourceName()}/ClearRecentAlerts`);
         } else if (PressedFooterTab == "suggestedcontacts") {
-            $.post('https://ef-phone/ClearRecentAlerts');
+            $.post(`https://${GetParentResourceName()}/ClearRecentAlerts`);
         }
 
         CurrentFooterTab = PressedFooterTab;
@@ -92,7 +92,7 @@ $(document).on('click', '.phone-recent-call', function(e){
         name: RecentData.name
     }
 
-    $.post('https://ef-phone/CallContact', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/CallContact`, JSON.stringify({
         ContactData: cData,
         Anonymous: QB.Phone.Data.AnonymousCall,
     }), function(status){
@@ -144,7 +144,7 @@ $(document).on('click', ".phone-keypad-key-call", function(e){
         name: InputNum,
     }
 
-    $.post('https://ef-phone/CallContact', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/CallContact`, JSON.stringify({
         ContactData: cData,
         Anonymous: QB.Phone.Data.AnonymousCall,
     }), function(status){
@@ -227,7 +227,7 @@ $(document).on('click', '#new-chat-phone', function(e){
     var ContactData = $("[data-contactid='"+ContactId+"']").data('contactData');
 
     if (ContactData.number !== QB.Phone.Data.PlayerData.charinfo.phone) {
-        $.post('https://ef-phone/GetWhatsappChats', JSON.stringify({}), function(chats){
+        $.post(`https://${GetParentResourceName()}/GetWhatsappChats`, JSON.stringify({}), function(chats){
             QB.Phone.Functions.LoadWhatsappChats(chats);
         });
 
@@ -244,7 +244,7 @@ $(document).on('click', '#new-chat-phone', function(e){
             QB.Phone.Functions.ToggleApp("whatsapp", "block");
             QB.Phone.Data.currentApplication = "whatsapp";
 
-            $.post('https://ef-phone/GetWhatsappChat', JSON.stringify({phone: ContactData.number}), function(chat){
+            $.post(`https://${GetParentResourceName()}/GetWhatsappChat`, JSON.stringify({phone: ContactData.number}), function(chat){
                 QB.Phone.Functions.SetupChatMessages(chat, {
                     name: ContactData.name,
                     number: ContactData.number
@@ -303,7 +303,7 @@ $(document).on('click', '#edit-contact-save', function(e){
     var ContactIban = $(".phone-edit-contact-iban").val();
 
     if (ContactName != "" && ContactNumber != "") {
-        $.post('https://ef-phone/EditContact', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/EditContact`, JSON.stringify({
             CurrentContactName: ContactName,
             CurrentContactNumber: ContactNumber,
             CurrentContactIban: ContactIban,
@@ -330,7 +330,7 @@ $(document).on('click', '#edit-contact-delete', function(e){
     var ContactNumber = $(".phone-edit-contact-number").val();
     var ContactIban = $(".phone-edit-contact-iban").val();
 
-    $.post('https://ef-phone/DeleteContact', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/DeleteContact`, JSON.stringify({
         CurrentContactName: ContactName,
         CurrentContactNumber: ContactNumber,
         CurrentContactIban: ContactIban,
@@ -434,7 +434,7 @@ $(document).on('click', '#add-contact-save', function(e){
     var ContactIban = $(".phone-add-contact-iban").val();
 
     if (ContactName != "" && ContactNumber != "") {
-        $.post('https://ef-phone/AddNewContact', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/AddNewContact`, JSON.stringify({
             ContactName: ContactName,
             ContactNumber: ContactNumber,
             ContactIban: ContactIban,
@@ -448,7 +448,7 @@ $(document).on('click', '#add-contact-save', function(e){
         }, 250)
 
         if (SelectedSuggestion !== null) {
-            $.post('https://ef-phone/RemoveSuggestion', JSON.stringify({
+            $.post(`https://${GetParentResourceName()}/RemoveSuggestion`, JSON.stringify({
                 data: $(SelectedSuggestion).data('SuggestionData')
             }));
             $(SelectedSuggestion).remove();
@@ -485,7 +485,7 @@ $(document).on('click', '#phone-start-call', function(e){
 
 SetupCall = function(cData) {
     var retval = false;
-    $.post('https://ef-phone/CallContact', JSON.stringify({
+    $.post(`https://${GetParentResourceName()}/CallContact`, JSON.stringify({
         ContactData: cData,
         Anonymous: QB.Phone.Data.AnonymousCall,
     }), function(status){
@@ -541,19 +541,19 @@ CancelOutgoingCall = function() {
 $(document).on('click', '#outgoing-cancel', function(e){
     e.preventDefault();
 
-    $.post('https://ef-phone/CancelOutgoingCall');
+    $.post(`https://${GetParentResourceName()}/CancelOutgoingCall`);
 });
 
 $(document).on('click', '#incoming-deny', function(e){
     e.preventDefault();
 
-    $.post('https://ef-phone/DenyIncomingCall');
+    $.post(`https://${GetParentResourceName()}/DenyIncomingCall`);
 });
 
 $(document).on('click', '#ongoing-cancel', function(e){
     e.preventDefault();
 
-    $.post('https://ef-phone/CancelOngoingCall');
+    $.post(`https://${GetParentResourceName()}/CancelOngoingCall`);
 });
 
 IncomingCallAlert = function(CallData, Canceled, AnonymousCall) {
@@ -711,7 +711,7 @@ $(document).on('click', '.phone-currentcall-container', function(e){
 $(document).on('click', '#incoming-answer', function(e){
     e.preventDefault();
 
-    $.post('https://ef-phone/AnswerCall');
+    $.post(`https://${GetParentResourceName()}/AnswerCall`);
 });
 
 QB.Phone.Functions.AnswerCall = function(CallData) {

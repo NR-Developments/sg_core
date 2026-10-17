@@ -107,13 +107,13 @@ var admin = false
         });
         document.onkeyup = function (data) {
           if (data.keyCode == '27') { // Escape key 76 = L (Change the 76 to whatever keycodes you want to hide the carlock ui LINK https://css-tricks.com/snippets/javascript/javascript-keycodes/)
-            $.post("https://renzu_scoreboard/close",{},function(datab){});
+            $.post(`https://${GetParentResourceName()}/close`,{},function(datab){});
             document.getElementById("scoreboard").style.display = "none";
             document.getElementById("main").innerHTML = '';
             document.getElementById("jobs").innerHTML = '';
           }
           if (data.keyCode == '121') { // Escape key 76 = L (Change the 76 to whatever keycodes you want to hide the carlock ui LINK https://css-tricks.com/snippets/javascript/javascript-keycodes/)
-            $.post("https://renzu_scoreboard/close",{},function(datab){});
+            $.post(`https://${GetParentResourceName()}/close`,{},function(datab){});
             document.getElementById("scoreboard").style.display = "none";
             document.getElementById("main").innerHTML = '';
             document.getElementById("jobs").innerHTML = '';
@@ -136,7 +136,7 @@ var admin = false
               if (checkURL(url[i].value)) {
                 if (imageExists(url[i].value)) {
                   console.log("UPLOAD")
-                  $.post("https://renzu_scoreboard/avatarupload",JSON.stringify({url:url[i].value}),function(datab){});
+                  $.post(`https://${GetParentResourceName()}/avatarupload`,JSON.stringify({url:url[i].value}),function(datab){});
                 }
               }
             }

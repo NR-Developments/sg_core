@@ -1,5 +1,5 @@
-if not GetResourceState("ND_GunAnims"):find("start") then
-    return lib.print.warn("ND_GunAnims script not found, please install it or else the shield script won't work!")
+local function hasGunAnimations()
+    return GetResourceState('ND_GunAnims') == 'started'
 end
 
 local gunAnim = nil
@@ -87,7 +87,7 @@ local function disableShield()
     local ped = cache.ped
     StopAnimTask(ped, "combat@gestures@gang@pistol_1h@beckon", "-90", 2.0)
 
-    lib.RequestAnimDict("combat@gestures@gang@pistol_1h@beckon")
+    lib.requestAnimDict("combat@gestures@gang@pistol_1h@beckon")
     TaskPlayAnim(ped, "combat@gestures@gang@pistol_1h@beckon", "-180", 8.0, -8.0, -1, 50, 0.0, false, false, false)
 
     Wait(500)
@@ -95,8 +95,8 @@ local function disableShield()
     Wait(200)
     SetPlayerSprint(cache.playerId, true)
     
-    if gunAnim then
-        exports["ND_GunAnims"]:setAimAnim("default")
+    if gunAnim and hasGunAnimations() then
+        exports["ND_GunAnims"]:setAimAnim(gunAnim)
     end
 
     LocalPlayer.state.blockHandsUp = false
@@ -125,14 +125,17 @@ local function enableShield()
         })
     end
 
-    gunAnim = exports["ND_GunAnims"]:getAimAnim()
-    exports["ND_GunAnims"]:setAimAnim("gang")
+    gunAnim = nil
+    if hasGunAnimations() then
+        gunAnim = exports["ND_GunAnims"]:getAimAnim()
+        exports["ND_GunAnims"]:setAimAnim("gang")
+    end
 
     LocalPlayer.state.blockHandsUp = true
     holdingShield = true
     local coords = GetEntityCoords(ped)
 
-    lib.RequestAnimDict("combat@gestures@gang@pistol_1h@beckon")
+    lib.requestAnimDict("combat@gestures@gang@pistol_1h@beckon")
     TaskPlayAnim(ped, "combat@gestures@gang@pistol_1h@beckon", "-90", 8.0, -8.0, -1, 50, 0.0, false, false, false)
     Wait(600)
     shieldOnBack(false)
@@ -151,7 +154,7 @@ local function enableShield()
             end
 
             if weapon and not IsEntityPlayingAnim(ped, "combat@gestures@gang@pistol_1h@beckon", "-90", 3) then
-                lib.RequestAnimDict("combat@gestures@gang@pistol_1h@beckon")
+                lib.requestAnimDict("combat@gestures@gang@pistol_1h@beckon")
                 TaskPlayAnim(ped, "combat@gestures@gang@pistol_1h@beckon", "-90", 8.0, -8.0, -1, 50, 0.0, false, false, false)
             end
 

@@ -729,4 +729,4 @@ RegisterCommand("911", function(source, args, rawCommand)
     })
 end, false)
 
-print("^1[^4ND_MDT^1] ^0for support join the discord server: ^4https://discord.gg/Z9Mxu72zZ6^0.")
+print("^5[sg_mdt]^7 Client initialized.")

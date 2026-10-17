@@ -10,7 +10,7 @@ $(document).on('click', '#paytm-send-money-ended', function(e){
     var Amount = $(".paytm-input-two").val();
     var Reason = $(".paytm-input-three").val();
     if ((ID && Amount && Reason) != "" && (ID && Amount) >= 1){
-        $.post('https://ef-phone/paytm_givemoney_toID', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/paytm_givemoney_toID`, JSON.stringify({
             ID: ID,
             Amount: Amount,
             Reason: Reason,

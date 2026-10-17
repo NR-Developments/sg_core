@@ -2,7 +2,7 @@ $(document).on('click', '#ping-send', function(e){
     e.preventDefault();
     var IDPlayer = $("#channel").val();
     if (IDPlayer >= 1){
-        $.post('https://ef-phone/SendPingPlayer', JSON.stringify({
+        $.post(`https://${GetParentResourceName()}/SendPingPlayer`, JSON.stringify({
             id: IDPlayer
         }));
         $("#channel").val("");
@@ -11,12 +11,12 @@ $(document).on('click', '#ping-send', function(e){
 
 $(document).on('click', '#ping-accept', function(e){
     e.preventDefault();
-    $.post('https://ef-phone/AcceptPingPlayer', JSON.stringify({}));
+    $.post(`https://${GetParentResourceName()}/AcceptPingPlayer`, JSON.stringify({}));
 });
 
 $(document).on('click', '#ping-reject', function(e){
     e.preventDefault();
-    $.post('https://ef-phone/rejectPingPlayer', JSON.stringify({}));
+    $.post(`https://${GetParentResourceName()}/rejectPingPlayer`, JSON.stringify({}));
 });
 
 $(document).ready(function(){
