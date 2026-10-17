@@ -1,0 +1,156 @@
+{
+  "resources": 63,
+  "runtime_lua_files": 333,
+  "duplicates": [],
+  "missing_startup_resources": [],
+  "startup_order_errors": [],
+  "missing_imports": [],
+  "missing_dependencies": [
+    {
+      "resource": "screenshot-basic",
+      "dependency": "yarn"
+    },
+    {
+      "resource": "screenshot-basic",
+      "dependency": "webpack"
+    }
+  ],
+  "missing_manifest_entries": [
+    {
+      "resource": "screenshot-basic",
+      "entry": "dist/client.js",
+      "kind": "client_script"
+    },
+    {
+      "resource": "screenshot-basic",
+      "entry": "dist/server.js",
+      "kind": "server_script"
+    },
+    {
+      "resource": "screenshot-basic",
+      "entry": "dist/ui.html",
+      "kind": "files"
+    },
+    {
+      "resource": "screenshot-basic",
+      "entry": "dist/ui.html",
+      "kind": "ui_page"
+    },
+    {
+      "resource": "sg_airport",
+      "entry": "bridge/**/shared.lua",
+      "kind": "shared_scripts"
+    },
+    {
+      "resource": "sg_airport",
+      "entry": "modules/**/shared.lua",
+      "kind": "shared_scripts"
+    },
+    {
+      "resource": "sg_mp3",
+      "entry": "html/sounds/*.ogg",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_mp3",
+      "entry": "html/sounds/*.mp3",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_dispatch",
+      "entry": "ui/vehicles/*.png",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_dispatch",
+      "entry": "ui/*.svg",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_itemback",
+      "entry": "components.json",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_itemback",
+      "entry": "html/index.html",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_itemback",
+      "entry": "html/script.js",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_itemback",
+      "entry": "html/style.css",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_itemback",
+      "entry": "html/levelup.gif",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_itemback",
+      "entry": "html/audio/*.ogg",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_shops",
+      "entry": "web/levelup.gif",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_shops",
+      "entry": "web/audio/*.ogg",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_vehicleshop",
+      "entry": "imgs/*.png",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_hygiene",
+      "entry": "ligoshower.ytyp",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_bag",
+      "entry": "html/index.html",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_bag",
+      "entry": "html/script.js",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_bag",
+      "entry": "html/style.css",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_bag",
+      "entry": "html/levelup.gif",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_bag",
+      "entry": "html/audio/*.ogg",
+      "kind": "files"
+    },
+    {
+      "resource": "sg_bag",
+      "entry": "html/index.html",
+      "kind": "ui_page"
+    },
+    {
+      "resource": "sg_customs",
+      "entry": "imgs/uploads/*.jpg",
+      "kind": "files"
+    }
+  ],
+  "lua_errors": []
+}

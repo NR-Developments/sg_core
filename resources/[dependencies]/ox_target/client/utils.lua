@@ -194,14 +194,14 @@ SetTimeout(0, function()
         end)
     end
 
-    if utils.hasExport('ox_core.GetPlayer') then
+    if utils.hasExport('sg_core.getPlayer') then
+        require 'client.framework.nd'
+    elseif utils.hasExport('ox_core.GetPlayer') then
         require 'client.framework.ox'
     elseif utils.hasExport('es_extended.getSharedObject') then
         require 'client.framework.esx'
     elseif utils.hasExport('qbx_core.HasGroup') then
         require 'client.framework.qbx'
-    elseif utils.hasExport('ND_Core.getPlayer') then
-        require 'client.framework.nd'
     end
 end)
 
