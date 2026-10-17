@@ -15,6 +15,7 @@ jobs:
       - name: Test startup imports and character UI
         run: |
           python3 tools/test_startup.py
+          python3 tools/test_hud.py
           node tools/test_character_ui.js
       - name: Check consolidated schema matches resource sources
         run: python3 tools/build_database.py --check

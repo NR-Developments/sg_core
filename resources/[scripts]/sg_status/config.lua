@@ -1,4 +1,4 @@
-enableUI = true
+enableUI = false -- sg_hud renders status; keep this resource running for gameplay.
 config = {
     {
         type = "hunger",

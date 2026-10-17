@@ -4,6 +4,8 @@ This is a reviewable development migration, not the completed full framework req
 
 ## Implemented
 
+- `sg_hud` replaces the visible status/voice overlays using the uploaded Trew HUD layout, renderer, images and sounds. Native SG player/status data and PMA voice feed the existing UI; `sg_status` remains the gameplay backend with its overlay disabled. Society balance requires a real server-side provider; SG Banking does not currently have society accounts. See the resource README for controls, exports and scope.
+
 - The core import returns its proxy table for `require("@sg_core.init")`, including ambulance bridges.
 - Character and spawn NUI callback origins use `GetParentResourceName()`; other migrated add-on UIs use the same rule. Character slot IDs are one-based throughout UI actions, including sparse/contiguous serialized character lists.
 - Selector initialization uses the manifest's ox_lib import rather than anonymously reloading it. Registration accepts an optional background story and persists nationality/background in SG metadata; failed registration reopens the form.

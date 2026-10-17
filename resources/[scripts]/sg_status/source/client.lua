@@ -72,6 +72,7 @@ local function createStatus(index)
 end
 
 local function setupPlayerStatus(player)
+    if not player then characterStatus=nil;shown=false;return end
     local characterData = player?.metadata?.status
     characterStatus = {}
 
@@ -161,4 +162,9 @@ CreateThread(function()
             info = json.encode(characterStatus)
         })
     end
+end)
+
+RegisterNetEvent("SG:characterUnloaded", function()
+    characterStatus=nil;shown=false
+    SendNUIMessage({type="remove"})
 end)

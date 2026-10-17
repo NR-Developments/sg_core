@@ -14,7 +14,7 @@ The supplied config targets GTA game build **3570**, per the server owner. `sv_s
 4. Start using `server.cfg`, which loads `sg_core.cfg`, `inventory.cfg`, then `resources.cfg`. Do not additionally ensure the whole `[scripts]` folder or run another core.
 5. For a manual full schema import, use [database/SG_Framework.sql](database/SG_Framework.sql) in the database selected by `mysql_connection_string`; see [database instructions](database/README.md). Core tables are also created on first run; banking and MDT retain their own schema initialization. See [integration status](docs/INTEGRATION.md) before enabling optional add-ons.
 
-The default set includes character selection, appearance shops, inventory/target/doors, status, banking, dealership, fuel, casino/blackjack, nitro, MDT, police and ambulance. These still require live gameplay validation. Competing shops, dealerships, and job/mechanic systems are not automatically started together.
+The default set includes character selection, appearance shops, inventory/target/doors, status, the original Trew UI adapted as `sg_hud`, banking, dealership, fuel, casino/blackjack, nitro, MDT, police and ambulance. These still require live gameplay validation. Competing shops, dealerships, and job/mechanic systems are not automatically started together.
 
 Shared upstream libraries keep their established names (`ox_lib`, `oxmysql`, `ox_inventory`, `ox_target`, `ox_doorlock`, `fivem-appearance`, `pma-voice`). The `es_extended` and `qb-core` resources are compatibility entry points backed by SG, not independent player stores. They cover a subset of APIs; arbitrary ESX/QB/Qbox scripts are not guaranteed compatible. No complete Qbox adapter is supplied.
 
@@ -23,6 +23,7 @@ Shared upstream libraries keep their established names (`ox_lib`, `oxmysql`, `ox
 ```sh
 python tools/test_core.py
 python tools/test_startup.py
+python tools/test_hud.py
 node tools/test_character_ui.js
 python tools/audit_resources.py
 ```
