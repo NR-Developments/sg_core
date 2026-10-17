@@ -1,6 +1,6 @@
 {
   "resources": 64,
-  "runtime_lua_files": 342,
+  "runtime_lua_files": 344,
   "duplicates": [],
   "missing_startup_resources": [],
   "startup_order_errors": [],

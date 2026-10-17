@@ -9,8 +9,11 @@ function HUDAccounts.blackMoney(player)
 end
 
 function HUDAccounts.society(player)
-    -- SG Banking currently has personal accounts, not a society ledger.
-    -- Replace this function with your society banking resource's read export.
-    -- It is called only for a server-verified boss. nil keeps the unavailable balance hidden.
-    return nil
+    if GetResourceState('sg_banking') ~= 'started' then return nil end
+    local accounts = exports.sg_banking:getOwnedSocieties(player.source)
+    -- Prefer the owner's current business; otherwise show their first owned account.
+    for _, account in ipairs(accounts) do
+        if account.name == player.job then return account.balance end
+    end
+    return accounts[1] and accounts[1].balance or nil
 end

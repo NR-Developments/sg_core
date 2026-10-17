@@ -73,18 +73,18 @@ function GetPedInVehicleSeat()return 10 end
 function TriggerClientEvent()relay=relay+1 end
 source=1
 player={source=1,id=12,jobInfo={isBoss=false}}
-local societyReads=0
-HUDAccounts={blackMoney=function()return 3 end,society=function()societyReads=societyReads+1;return 100 end}
+local societyReads,owner=0,false
+HUDAccounts={blackMoney=function()return 3 end,society=function()societyReads=societyReads+1;return owner and 100 or nil end}
 '''
 server_checks=r'''
 local result=serverCallbacks['sg_hud:accounts'](1)
-assert(result.blackMoney==3 and result.hasSociety==false and societyReads==0,'non-boss saw society data')
-player.jobInfo.isBoss=true;result=serverCallbacks['sg_hud:accounts'](1)
-assert(result.hasSociety and result.society==100 and societyReads==1)
+assert(result.blackMoney==3 and result.hasSociety==false and societyReads==1,'non-owner saw society data')
+owner=true;result=serverCallbacks['sg_hud:accounts'](1)
+assert(result.hasSociety and result.society==100 and societyReads==2)
 events['sg_hud:syncCarLights']('invalid');assert(relay==0)
 vehicle=0;events['sg_hud:syncCarLights']('left');assert(relay==0)
 vehicle=20;events['sg_hud:syncCarLights']('both');assert(relay==1)
-print('PASS: server-verified society access, optional balances and driver/signal validation')
+print('PASS: server-verified owner access, optional balances and driver/signal validation')
 '''
 source=bootstrap+chunk('locales/init.lua')+chunk('locales/br.lua')+chunk('locales/en.lua')+chunk('locales/es.lua')+chunk('config.lua')+chunk('client/bridge.lua')+chunk('client/client.lua')+checks+chunk('server/server.lua')+server_checks
 encoded=source.encode();state=lib.luaL_newstate();lib.luaL_openlibs(state)

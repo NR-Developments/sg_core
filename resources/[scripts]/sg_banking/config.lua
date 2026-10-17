@@ -3,3 +3,7 @@ config = {
     maxWithdrawDepositBank = 50000,
     minWithdrawDepositBank = 1000
 }
+
+-- Only these SERVER resources may credit/debit business revenue through exports.
+-- Example: config.societyResources = {sg_dealership = true}
+config.societyResources = {}

@@ -11,7 +11,7 @@ Native SG Framework integration of the supplied Trew HUD UI. Original HTML layou
 - PMA Voice remains responsible for voice distance. Both its normal keybind and this HUD's configured range key update the same indicator. This HUD never changes the talker proximity directly.
 - Vehicle fuel uses the GTA fuel value maintained by `sg_fuel`; speed (KMH/MPH), gears, lights, sirens, seatbelt/ejection, cruise, indicators, weapons/ammo, location, date and custom status exports retain their original functions.
 - Black-money display reads the optional inventory item named by `Config.BlackMoneyItem`; it displays zero when absent. This does not create a second SG currency account.
-- Society money is available through the server-only `HUDAccounts.society(player)` adapter in `server/adapters.lua`. **The current SG Banking resource has no society ledger**, so that adapter returns nil and the unavailable row stays hidden. Connect your actual society balance read export there; only a server-verified boss can receive it. The original display/configuration is retained, but no fictitious balance is supplied.
+- Society money reads the native SG Banking ledger for explicitly registered character owners. Boss ranks alone grant no access. With several owned businesses, the HUD shows the current job’s business or the first owned account.
 
 All balance providers are read-only. Indicator relays validate the driver's vehicle and accepted signal states on the server. Remote players outside streaming range are ignored.
 

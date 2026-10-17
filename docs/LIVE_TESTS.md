@@ -11,3 +11,12 @@ Use an isolated server/database first. A passing Python check is not a successfu
 7. Exercise clothing shops, fuel, status/consumables, casino games and nitro. Verify server-side payments/rewards, cleanup and UI focus. Investigate inherited event validation issues before exposing them to the public.
 8. Enable an optional add-on only after its `INTEGRATION.md` row is resolved. Validate its complete workflow and persistence and check for duplicate markers/menus/commands with the default set.
 9. Perform a full server-event permission/rate-limit/amount audit and load test. Record tested FXServer/MySQL versions, resources enabled, test outcomes and error logs before describing the stack as production-ready.
+
+## Society banking
+
+- Console: `societyowner add mechanic <characterId> Workshop`; owner uses `/societybank`.
+- Deposit from personal bank, withdraw, inspect history and HUD, restart and verify both balances.
+- Confirm a non-owner boss cannot list/read/transfer, including direct callback requests.
+- Remove the owner; confirm the next callback and HUD refresh hide the account.
+- Concurrent withdrawals cannot overdraw; database errors refund failed deposits.
+- Financial writes from unlisted server resources must fail.

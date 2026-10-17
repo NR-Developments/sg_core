@@ -16,6 +16,7 @@ jobs:
         run: |
           python3 tools/test_startup.py
           python3 tools/test_hud.py
+          python3 tools/test_society.py
           node tools/test_character_ui.js
       - name: Check consolidated schema matches resource sources
         run: python3 tools/build_database.py --check

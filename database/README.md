@@ -28,3 +28,5 @@ python tools/build_database.py --check
 ```
 
 CI imports the schema twice into fresh MySQL 8.0 and MariaDB 10.11 databases, checks table coverage and data preservation, and exercises foreign-key rejection/cascades with test records. These database tests are separate from live FiveM gameplay testing.
+
+Native SG society accounts, explicit character owners, and transaction history are included in the consolidated import. Use the server-console `societyowner` command documented in sg_banking to assign owners; boss ranks alone do not grant account access.

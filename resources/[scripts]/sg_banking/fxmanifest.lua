@@ -29,10 +29,12 @@ shared_scripts {
 }
 server_scripts {
     "@oxmysql/lib/MySQL.lua",
-    "source/server.lua"
+    "source/server.lua",
+    "source/society_server.lua"
 }
 client_scripts {
-    "source/client.lua"
+    "source/client.lua",
+    "source/society_client.lua"
 }
 
 dependency "sg_core"

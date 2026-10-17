@@ -13,9 +13,7 @@ lib.callback.register('sg_hud:accounts', function(src)
     local player = exports.sg_core:getPlayer(src)
     if not player then return {blackMoney=0, society=0, hasSociety=false} end
     local now = GetGameTimer()
-    if lastAccounts[src] and now-lastAccounts[src].time < 1000 then return lastAccounts[src].value end
-    local boss = player.jobInfo and player.jobInfo.isBoss == true
-    local society = boss and read(HUDAccounts.society, player) or nil
+    local society = read(HUDAccounts.society, player)
     local result = {blackMoney=read(HUDAccounts.blackMoney, player) or 0, society=society or 0, hasSociety=society ~= nil}
     lastAccounts[src] = {time=now, value=result}
     return result

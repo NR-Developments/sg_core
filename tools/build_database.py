@@ -8,6 +8,7 @@ SOURCES=[
  ('resources/[scripts]/sg_core/database/vehicles.sql',None),
  ('resources/[scripts]/sg_banking/database/accounts.sql',None),
  ('resources/[scripts]/sg_banking/database/invoices.sql',None),
+ ('resources/[scripts]/sg_banking/database/societies.sql',None),
  *[(f'resources/[scripts]/sg_mdt/bridge/nd/database/{x}.sql',None) for x in ['bolos','records','reports','weapons']],
  ('resources/[scripts]/ox_inventory/modules/mysql/server.lua',{'ox_inventory'}),
  ('resources/[dependencies]/ox_doorlock/sql/ox_doorlock.sql',None),
