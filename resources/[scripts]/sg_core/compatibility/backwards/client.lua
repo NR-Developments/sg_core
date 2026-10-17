@@ -1,0 +1,1 @@
+-- Legacy ND v1 APIs are intentionally disabled. Use sg_core native server exports.

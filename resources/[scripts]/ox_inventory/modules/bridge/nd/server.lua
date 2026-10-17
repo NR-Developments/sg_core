@@ -1,33 +1,34 @@
-if not lib.checkDependency('ND_Core', '2.0.0', true) then return end
+if not lib.checkDependency('sg_core', '2.0.0', true) then return end
 
 local Inventory = require 'modules.inventory.server'
-NDCore = {}
+SGCore = {}
 
-lib.load('@ND_Core.init')
+lib.load('@sg_core.init')
 
-AddEventHandler("ND:characterUnloaded", server.playerDropped)
+AddEventHandler("SG:characterUnloaded", server.playerDropped)
 
 local function reorderGroups(groups)
-    groups = groups or {}
-    for group, info in pairs(groups) do
-        groups[group] = info.rank
+    local result = {}
+    for group, info in pairs(groups or {}) do
+        result[group] = type(info) == "table" and info.rank or info
     end
-    return groups
+    return result
 end
 
 local function setCharacterInventory(character)
-    character.identifier = character.id
-    character.name = ("%s %s"):format(character.firstname, character.lastname)
-    character.dateofbirth = character.dob
-    character.sex = character.gender
-    character.groups = reorderGroups(character.groups)
-    server.setPlayerInventory(character, character.inventory)
+    local data = {
+        source = character.source, identifier = character.id,
+        name = ("%s %s"):format(character.firstname, character.lastname),
+        dateofbirth = character.dob, sex = character.gender,
+        groups = reorderGroups(character.groups)
+    }
+    server.setPlayerInventory(data, character.inventory)
     Inventory.SetItem(character.source, "money", character.cash)
 end
 
 SetTimeout(500, function()
-    server.GetPlayerFromId = NDCore.getPlayer
-    for _, character in pairs(NDCore.getPlayers()) do
+    server.GetPlayerFromId = SGCore.getPlayer
+    for _, character in pairs(SGCore.getPlayers()) do
         setCharacterInventory(character)
     end
 end)
@@ -37,18 +38,18 @@ server.accounts = {
     money = 0
 }
 
-AddEventHandler("ND:characterLoaded", function(character)
+AddEventHandler("SG:characterLoaded", function(character)
     if not character then return end
     setCharacterInventory(character)
 end)
 
-AddEventHandler("ND:moneyChange", function(src, account, amount, changeType, reason)
+AddEventHandler("SG:moneyChange", function(src, account, amount, changeType, reason)
     if account ~= "cash" then return end
     local item = Inventory.GetItemCount(src, 'money')
     Inventory.SetItem(src, "money", changeType == "set" and amount or changeType == "remove" and item - amount or changeType == "add" and item + amount)
 end)
 
-AddEventHandler("ND:updateCharacter", function(character, updatedData)
+AddEventHandler("SG:updateCharacter", function(character, updatedData)
     local validUpdateData = { ["job"] = true, ["groups"] = true, ["jobInfo"] = true }
     if not validUpdateData[updatedData] then return end
 	
@@ -62,8 +63,8 @@ function server.syncInventory(inv)
     local accounts = Inventory.GetAccountItemCounts(inv)
 
     if accounts then
-        local player = NDCore.getPlayer(inv.id)
-        player.setData("cash", accounts.money)
+        local player = SGCore.getPlayer(inv.id)
+        if player and player.cash ~= accounts.money then player.setData("cash", accounts.money) end
     end
 end
 
@@ -81,7 +82,7 @@ end
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function server.hasLicense(inv, license)
-    local player = NDCore.getPlayer(inv.id)
+    local player = SGCore.getPlayer(inv.id)
     if not player then return end
 
     local licenses = player.getMetadata("licenses") or {}
@@ -102,14 +103,14 @@ function server.buyLicense(inv, license)
 	end
 
 	Inventory.RemoveItem(inv, "money", license.price)
-    local player = NDCore.getPlayer(inv.id)
+    local player = SGCore.getPlayer(inv.id)
     player.createLicense("weapon")
 	return true, "have_purchased"
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function server.isPlayerBoss(playerId, group)
-    local player = NDCore.getPlayer(playerId)
+    local player = SGCore.getPlayer(playerId)
     if not player then return end
 
     local groupInfo = player.getGroup(group)
@@ -120,5 +121,9 @@ end
 ---@return number | string
 ---@diagnostic disable-next-line: duplicate-set-field
 function server.getOwnedVehicleId(entityId)
-    return NDCore.getVehicle(entityId)?.id
+    return SGCore.getVehicle(entityId)?.id
+end
+
+function server.UseItem(source, name, data)
+    return exports.sg_core:UseItem(source, name, data)
 end

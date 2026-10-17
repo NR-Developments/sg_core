@@ -1,0 +1,58 @@
+name: SG integration checks
+on:
+  pull_request:
+  push:
+    branches: [main, 'codex/**']
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lua runtime for structural and contract checks
+        run: sudo apt-get update && sudo apt-get install -y liblua5.4-0
+      - name: Test canonical core and adapters
+        run: python3 tools/test_core.py
+      - name: Test startup imports and character UI
+        run: |
+          python3 tools/test_startup.py
+          python3 tools/test_hud.py
+          python3 tools/test_society.py
+          node tools/test_character_ui.js
+      - name: Check consolidated schema matches resource sources
+        run: python3 tools/build_database.py --check
+      - name: Audit declared runtime scripts and default startup
+        run: python3 tools/audit_resources.py
+
+  database-import:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - image: mysql:8.0
+            health: mysqladmin ping -h 127.0.0.1 -psg_ci_only
+          - image: mariadb:10.11
+            health: healthcheck.sh --connect --innodb_initialized
+    services:
+      database:
+        image: ${{ matrix.image }}
+        env:
+          MYSQL_ROOT_PASSWORD: sg_ci_only
+          MYSQL_ROOT_HOST: '%'
+          MYSQL_DATABASE: sg_schema_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd "${{ matrix.health }}"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install database client
+        run: sudo apt-get update && sudo apt-get install -y default-mysql-client
+      - name: Import schema twice and test persistence and foreign keys
+        env:
+          MYSQL_PWD: sg_ci_only
+          SG_DATABASE_TEST_ALLOW_WRITE: '1'
+        run: python3 tools/test_database_import.py

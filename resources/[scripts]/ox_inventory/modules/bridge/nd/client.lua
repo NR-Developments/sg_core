@@ -1,10 +1,10 @@
-if not lib.checkDependency('ND_Core', '2.0.0', true) then return end
+if not lib.checkDependency('sg_core', '2.0.0', true) then return end
 
-NDCore = {}
+SGCore = {}
 
-lib.load('@ND_Core.init')
+lib.load('@sg_core.init')
 
-RegisterNetEvent("ND:characterUnloaded", client.onLogout)
+RegisterNetEvent("SG:characterUnloaded", client.onLogout)
 
 local function reorderGroups(groups)
     groups = groups or {}
@@ -15,16 +15,16 @@ local function reorderGroups(groups)
 end
 
 SetTimeout(500, function()
-	local player = NDCore.getPlayer()
+	local player = SGCore.getPlayer()
     if not player then return end
     client.setPlayerData("groups", reorderGroups(player.groups))
 end)
 
-RegisterNetEvent("ND:characterLoaded", function(character)
+RegisterNetEvent("SG:characterLoaded", function(character)
     client.setPlayerData("groups", reorderGroups(character.groups))
 end)
 
-RegisterNetEvent("ND:updateCharacter", function(character, updatedData)
+RegisterNetEvent("SG:updateCharacter", function(character, updatedData)
     local validUpdateData = { ["job"] = true, ["groups"] = true, ["jobInfo"] = true }
     if not validUpdateData[updatedData] then return end
     client.setPlayerData("groups", reorderGroups(character.groups))
@@ -32,9 +32,9 @@ end)
 
 ---@diagnostic disable-next-line: duplicate-set-field
 function client.setPlayerStatus(values)
-    if GetResourceState("ND_Status") ~= "started" then return end
+    if GetResourceState("sg_status") ~= "started" then return end
 
-    local status = exports["ND_Status"]
+    local status = exports["sg_status"]
 
     for name, value in pairs(values) do
 

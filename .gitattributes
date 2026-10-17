@@ -1,0 +1,5 @@
+
+# Preserve the uploaded Trew renderer, stylesheet and upstream documentation verbatim.
+resources/*/sg_hud/html/app.js -whitespace
+resources/*/sg_hud/html/main.css -whitespace
+resources/*/sg_hud/readme-en.html -whitespace

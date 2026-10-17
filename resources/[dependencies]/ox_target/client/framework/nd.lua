@@ -1,12 +1,12 @@
-local NDCore = exports["ND_Core"]
+local SGCore = exports["sg_core"]
 
-local playerGroups = NDCore:getPlayer()?.groups or {}
+local playerGroups = SGCore:getPlayer()?.groups or {}
 
-RegisterNetEvent("ND:characterLoaded", function(data)
+RegisterNetEvent("SG:characterLoaded", function(data)
     playerGroups = data.groups
 end)
 
-RegisterNetEvent("ND:updateCharacter", function(data)
+RegisterNetEvent("SG:updateCharacter", function(data)
     if source == '' then return end
     playerGroups = data.groups or {}
 end)
@@ -46,3 +46,5 @@ function utils.hasPlayerGotGroup(filter)
         end
     end
 end
+
+RegisterNetEvent('SG:characterUnloaded',function() playerGroups={} end)

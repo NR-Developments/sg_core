@@ -13,10 +13,10 @@ sv_enforceGameBuild 3095 # https://docs.fivem.net/docs/server-manual/server-comm
 sv_pureLevel 1 # https://docs.fivem.net/docs/server-manual/server-commands/#sv_purelevel-level
 sv_scriptHookAllowed 0
 
-sv_hostname "SG Framework built with ND_Core Main by Andyyy!"
-sets sv_projectName "[ND_Core Main] SG Framework"
-sets sv_projectDesc "The official recipe for ND_Core."
-sets tags "nd_core"
+sv_hostname "SG Framework built with sg_core Main by Andyyy!"
+sets sv_projectName "[sg_core Main] SG Framework"
+sets sv_projectDesc "The official recipe for sg_core."
+sets tags "sg_core"
 sets locale "en_US"
 load_server_icon logo.png
 
